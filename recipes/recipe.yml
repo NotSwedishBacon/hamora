@@ -1,13 +1,13 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
-name: crispy-os
+name: Crispy-OS
 # description will be included in the image's metadata
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -19,12 +19,19 @@ modules:
 
   - type: dnf
     repos:
+      files:
+        - antigravity.repo
+        - https://cli.github.com/packages/rpm/gh-cli.repo
       copr:
         - atim/starship
     install:
       packages:
         - micro
         - starship
+        - antigravity
+        - gh
+        - distrobox
+        - gnome-tweaks
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
@@ -34,12 +41,32 @@ modules:
 
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: false # Send notification after install/uninstall is finished (true/false)
         scope: system
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
           - org.mozilla.firefox
-          - org.gnome.Loupe
+          - com.github.tchx84.Flatseal
+          - com.prusa3d.PrusaSlicer
+          - com.ranfdev.DistroShelf
+          - io.github.flattool.Warehouse
+          - it.mijorus.gearlever
+          - org.gimp.GIMP
+          - org.inkscape.Inkscape
+          - org.libreoffice.LibreOffice
+          - org.mozilla.firefox
+          - org.telegram.desktop
+          - com.discordapp.Discord
       - scope: user # Also add Flathub user repo, but no user packages
+
+  - type: gnome-extensions
+    install:
+      - Blur my Shell 
+      - AppIndicator and KStatusNotifierItem Support
+
+  - type: kargs
+    kargs:
+      - "i915.enable_guc=2"
+      - "i915.enable_fbc=1"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
