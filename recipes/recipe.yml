@@ -69,8 +69,9 @@ modules:
       - AppIndicator and KStatusNotifierItem Support
 
   - type: fonts
-    nerd-fonts:
-      - AdwaitaMono
+    fonts:
+      nerd-fonts:
+        - AdwaitaMono
 
   - type: kargs
     kargs:
