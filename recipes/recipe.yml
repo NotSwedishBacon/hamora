@@ -68,6 +68,10 @@ modules:
       - Blur my Shell 
       - AppIndicator and KStatusNotifierItem Support
 
+  - type: fonts
+    nerd-fonts:
+      - AdwaitaMono
+
   - type: kargs
     kargs:
       - "i915.enable_guc=2"
