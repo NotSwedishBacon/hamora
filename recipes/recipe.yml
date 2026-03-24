@@ -6,7 +6,7 @@ name: hamora
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/blue-build/base-images/fedora-cosmic
 image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -26,7 +26,6 @@ modules:
       packages:
         - antigravity
         - gh
-        - gnome-tweaks
         - fastfetch
     remove:
       packages:
@@ -34,9 +33,6 @@ modules:
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-        - gnome-software
-        - htop
-        - nvtop 
 
   - type: default-flatpaks
     configurations:
@@ -54,32 +50,10 @@ modules:
           - org.libreoffice.LibreOffice
           - org.telegram.desktop
           - com.discordapp.Discord
-          - io.github.kolunmi.Bazaar
           - io.github.shiftey.Desktop
-          - com.mattjakeman.ExtensionManager
-          - org.gimp.GIMP
-          - org.gnome.Calculator
-          - org.gnome.Calendar
-          - org.gnome.Characters
-          - org.gnome.Contacts
-          - org.gnome.Decibels
-          - org.gnome.Logs
-          - org.gnome.Loupe
-          - org.gnome.Maps
-          - org.gnome.Papers
-          - org.gnome.Showtime
-          - org.gnome.TextEditor
-          - org.gnome.Weather
-          - org.gnome.clocks
-          - org.gnome.font-viewer 
       - notify: false
         scope: user # Also add Flathub user repo, but no user packages
   
-  - type: gnome-extensions
-    install:
-      - Blur my Shell 
-      - AppIndicator and KStatusNotifierItem Support
-
   - type: fonts
     fonts:
       nerd-fonts:
