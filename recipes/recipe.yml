@@ -38,6 +38,12 @@ modules:
         - discord
         - telegram-desktop 
         - github-desktop 
+        - okular
+        - gwenview 
+        - haruna 
+        - kcalc
+        - krita 
+        
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
