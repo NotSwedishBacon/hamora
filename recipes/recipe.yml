@@ -22,6 +22,8 @@ modules:
       files:
         - antigravity.repo
         - https://cli.github.com/packages/rpm/gh-cli.repo
+        - chrome.repo
+        - mwt-packages.repo
       nonfree: rpmfusion
     install:
       packages:
